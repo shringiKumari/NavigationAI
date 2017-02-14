@@ -21,9 +21,9 @@ public class SearchExample : MonoBehaviour {
 
           //Dijkstra algorithm = new Dijkstra ();
 
-          GreedyBSF algorithm = new GreedyBSF ();
+          //GreedyBSF algorithm = new GreedyBSF ();
 
-          //AStar algorithm = new AStar ();
+          AStar algorithm = new AStar ();
           algorithm.setGraph (graph);
 
 		//List<int> path = bfs.findPath (source, target, true);

@@ -11,7 +11,7 @@ public class GreedyBSF : GraphSearch {
      protected PriorityQueue<Node> frontier;
      protected Dictionary<Node, Node> came_from;
      protected Dictionary<Node, Node> costSoFar;
-     protected List<Vector2> NodeHeuristic = new List<Vector2>{
+     protected List<Vector2> NodeHeuristic = new List<Vector2>{// hardcoded some random waypoints
           new Vector2(2,2),
           new Vector2(3,2),
           new Vector2(2,3),
@@ -37,8 +37,6 @@ public class GreedyBSF : GraphSearch {
           frontier.Enqueue(start, 0);
           came_from = new Dictionary<Node, Node>();
           came_from[start] = NONE;
-          //costSoFar = new Dictionary<Node, Node>();
-          //costSoFar [start] = 0;
 
           bool done = false;
 
