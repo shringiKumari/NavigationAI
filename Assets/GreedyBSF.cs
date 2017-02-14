@@ -23,15 +23,15 @@ public class GreedyBSF : GraphSearch {
           new Vector2(4, 3)
           };
 
-     private int heuristic(Node next, Node goal) {
+     private float heuristic(Node next, Node goal) {
           //return NodeHeuristic [next]; // heuristic should be based on distance
-          return (int)Vector2.Distance(NodeHeuristic[next], NodeHeuristic[goal]);
+          return Vector2.Distance(NodeHeuristic[next], NodeHeuristic[goal]);
      }
 
      public override List<Node> findPath(Node start, Node goal, bool t) {
           trace = t;
 
-          log ("Dijkstra: looking for path from " + start + " to " + goal);
+          log ("Greedy: looking for path from " + start + " to " + goal);
 
           frontier = new PriorityQueue<Node>();
           frontier.Enqueue(start, 0);

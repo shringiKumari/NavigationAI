@@ -8,6 +8,7 @@ public class SearchExample : MonoBehaviour {
 	public int nodes  = 9;
 	public int source = 0;
 	public int target = 6;
+     public List<GameObject> waypointList = new List<GameObject> ();
 
 	protected IntGraph graph;
 	
@@ -25,6 +26,13 @@ public class SearchExample : MonoBehaviour {
 
           AStar algorithm = new AStar ();
           algorithm.setGraph (graph);
+
+          List<Vector3> tempWaypointPositions = new List<Vector3>();
+
+          foreach (GameObject g in waypointList) {
+               tempWaypointPositions.Add (g.transform.position);
+          }
+          algorithm.setPositions (tempWaypointPositions);
 
 		//List<int> path = bfs.findPath (source, target, true);
           List<int> path = algorithm.findPath (source, target, true);
@@ -51,27 +59,40 @@ public class SearchExample : MonoBehaviour {
 	public void buildExample() {
 
 		// Add the nodes
-		foreach (int n in Enumerable.Range(0, nodes)) {
+          foreach (int n in Enumerable.Range(0, waypointList.Count)) {
 			graph.addNode ((int) n);
 		}
 
 		// Add edges
 		addUnitCostEdges (0, 1);
+		addUnitCostEdges (0, 3);
 		addUnitCostEdges (0, 2);
-		addUnitCostEdges (0, 4);
 
-		addUnitCostEdges (1, 5);
-		addUnitCostEdges (2, 3);
-		addUnitCostEdges (2, 6);
+		addUnitCostEdges (1, 4);
+          addUnitCostEdges (1, 6);
+          addUnitCostEdges (1, 10);
 
-		addUnitCostEdges (3, 5);
-		addUnitCostEdges (3, 6);
+		addUnitCostEdges (2, 7);
+		addUnitCostEdges (2, 5);
+          addUnitCostEdges (2, 3);
+
+		addUnitCostEdges (3, 9);
+		addUnitCostEdges (3, 8);
+
 		addUnitCostEdges (4, 5);
 		addUnitCostEdges (4, 7);
+          addUnitCostEdges (4, 10);
 
-		addUnitCostEdges (5, 8);
-		addUnitCostEdges (6, 8);
+		addUnitCostEdges (5, 7);
+          addUnitCostEdges (5, 10);
+
+		addUnitCostEdges (6, 9);
+          addUnitCostEdges (6, 10);
+
 		addUnitCostEdges (7, 8);
+
+          addUnitCostEdges (8, 9);
+
 	}
 
 	// Add undirected edge with unit cost

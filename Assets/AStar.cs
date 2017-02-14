@@ -9,16 +9,20 @@ public class AStar : GraphSearch {
      protected PriorityQueue<Node> frontier;
      protected Dictionary<Node, Node> came_from;
      protected Dictionary<Node, Node> costSoFar;
-     protected List<int> NodeHeuristic = new List<int>{2,1,1,0,3,1,1,2,2};
+     protected List<Vector3> NodeHeuristic = new List<Vector3>();
 
-     private int heuristic(Node next) {
-          return NodeHeuristic [next]; // heuristic should be based on distance
+     private float heuristic(Node next, Node goal) {
+          return Vector3.Distance(NodeHeuristic[next], NodeHeuristic[goal]);
+     }
+
+     public void setPositions(List<Vector3> waypointPositions) {
+          NodeHeuristic = waypointPositions;
      }
 
      public override List<Node> findPath(Node start, Node goal, bool t) {
           trace = t;
 
-          log ("Dijkstra: looking for path from " + start + " to " + goal);
+          log ("AStar: looking for path from " + start + " to " + goal);
 
           frontier = new PriorityQueue<Node>();
           frontier.Enqueue(start, 0);
@@ -47,7 +51,7 @@ public class AStar : GraphSearch {
                     log ("Adding to " + next + " to frontier");
                     int nextCost = costSoFar [(Node)current.item] + graph.cost ((Node)current.item, next);
                     if (!costSoFar.ContainsKey (next) || nextCost < costSoFar [next]) {
-                         frontier.Enqueue (next, nextCost + heuristic(next));
+                         frontier.Enqueue (next, nextCost + heuristic(next, goal));
                          came_from [next] = (Node)current.item;
                          costSoFar [next] = nextCost;
                     }

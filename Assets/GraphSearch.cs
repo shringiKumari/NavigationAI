@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using Node = System.Int32;
-using Cost = System.Int32;
+
 
 public abstract class GraphSearch {
 

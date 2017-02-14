@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 public struct CostedItem { //Mono has a bug that prevents nullable generic structs being used - Arrrghhhhh!
 	public object item;
-	public int cost;
+	public float cost;
 
-	public CostedItem(object item, int cost) {
+	public CostedItem(object item, float cost) {
 		this.item = item;
 		this.cost = cost;
 	}
@@ -15,13 +15,14 @@ public struct CostedItem { //Mono has a bug that prevents nullable generic struc
 public class PriorityQueue<T> {
 	private List<CostedItem> items = new List<CostedItem>();
 
-	public void add(T item, int cost) {
+	public void add(T item, float cost) {
 		items.Add (new CostedItem(item, cost));
 	}
 
-	public void Enqueue(T item, int cost) {
+     public void Enqueue(T item, float cost) {
 		add (item, cost);
 	}
+          
 
 	public CostedItem? Dequeue() { //return costeditem or null '?'
 		return poll ();
